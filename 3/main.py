@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 '''
 Потрібно написати систему, яка буде керувати бібліотекою
 '''
@@ -10,11 +11,30 @@ my_dict ={
     "number_of_pages": 400
 }
 
+@dataclass(frozen=True)
+class Person:
+    first_name: str
+    last_name: str
+    age: int = 18
+
+    def __post_init__(self):
+        self.__check_date__()
+        if self.age <= 0:
+            raise ValueError('Can not create a person with age less than zero')
+        
+    def __check_date__(self):
+        ...
+
+    # def __init__(self)
+
+
 # boilerplate code
 class Book:
     def __init__(self, title: str, author: str, number_of_pages: int):
         self.title = title
         self.author = author
+        if number_of_pages <= 0:
+            raise ValueError("Number of pages should be greater than 0")
         self.number_of_pages = number_of_pages
         self.days_to_loan = None
 
@@ -29,30 +49,30 @@ class Book:
 # my_dict = {'name': 'John', 'surname': 'Smith'}
 # name, surname = **my_dict
 
-my_book = Book("Lord of the Rings", "J.R.R Tolkien", 400)
-my_book_two = Book("Lord of the Rings", "J.R.R Tolkien", 400)
+# my_book = Book("Lord of the Rings", "J.R.R Tolkien", -10)
+# my_book_two = Book("Lord of the Rings", "J.R.R Tolkien", 400)
 
-print(dir(my_book))
+# print(dir(my_book))
 
 # print(my_book)
 # print(my_book_two)
 
 # print(my_book == my_book_two)
 
-my_book_list = [Book("Lord of the Rings", "J.R.R Tolkien", 400), Book("Lord of the Rings", "J.R.R Tolkien", 400)]
-# ==
+# my_book_list = [Book("Lord of the Rings", "J.R.R Tolkien", 400), Book("Lord of the Rings", "J.R.R Tolkien", 400)]
+# # ==
 
-searched_book = None
-for book in my_book_list:
-    if book.title == "Lord of the Rings" and book.author == "J.R.R Tolkien":
-        searched_book = book
-        break
+# searched_book = None
+# for book in my_book_list:
+#     if book.title == "Lord of the Rings" and book.author == "J.R.R Tolkien":
+#         searched_book = book
+#         break
 
-print(searched_book)
+# print(searched_book)
 
-my_book_list.remove(searched_book)
+# my_book_list.remove(searched_book)
 
-print(my_book_list)
+# print(my_book_list)
 # str_list = ["hello", "world"]
 
 # str_list.remove("hello")
@@ -62,3 +82,6 @@ print(my_book_list)
 # str, int
 
 # print(name, surname)
+
+person = Person("John", "Smith", 18)
+# person.last_name = "Jake"
