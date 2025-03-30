@@ -4,6 +4,10 @@ from collections import UserList
 Потрібно написати систему, яка буде керувати бібліотекою
 '''
 
+# public - доступний, його може використовувати будь-хто
+# protected - під захистом, його можна обмежено використовувати
+# private - приватний, можна використовувати тільки своїм
+
 # Назва книги, Автор, Кількість сторінок
 
 my_dict ={
@@ -57,10 +61,20 @@ class Book:
 
 
 class Library(UserList):
+
+    def __init__(self):
+        super().__init__()
+        self._number_of_books_given = 0 # protected
+        self.__number_of_employees = 10
+
     def append(self, element: Book):
         # if not isinstance(element, Book):
         #     raise ValueError
         self.data.append(element)
+
+    def print_books(self):
+        for book in self.data:
+            print(book)
 
 
 # my_dict = {'name': 'John', 'surname': 'Smith'}
@@ -105,12 +119,22 @@ class Library(UserList):
 # print(dir(person))
 
 lib = Library()
-lib.append(Book("Lord of the Rings", "J.R.R Tolkien", 400))
-lib.append(1)
-lib.append("hello")
-print(lib[1:2])
+# lib._number_of_books_given = 100
+# print(lib._number_of_books_given)
+# lib.append(Book("Lord of the Rings", "J.R.R Tolkien", 400))
+# lib.append(1)
+# lib.append("hello")
+# print(lib)
 
-my_list = [1, 2, 3]
-my_list[1]
-my_list.append(1)
-my_list[1:2]
+# print(lib.__number_of_employees)
+# print(dir(lib))
+print(lib._Library__number_of_employees)
+lib._Library__number_of_employees = 100
+print(lib._Library__number_of_employees)
+
+lib.print_books()
+
+# my_list = [1, 2, 3]
+# my_list[1]
+# my_list.append(1)
+# my_list[1:2]
