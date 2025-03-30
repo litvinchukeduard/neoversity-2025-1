@@ -11,13 +11,21 @@ my_dict ={
     "number_of_pages": 400
 }
 
-@dataclass(frozen=True)
-class Person:
+
+class Human:
+    def __init__(self, name: str):
+        self.name = name
+
+
+# @dataclass(frozen=True)
+@dataclass
+class Person(Human):
     first_name: str
     last_name: str
     age: int = 18
 
     def __post_init__(self):
+        super().__init__(self.first_name + " " + self.last_name)
         self.__check_date__()
         if self.age <= 0:
             raise ValueError('Can not create a person with age less than zero')
@@ -85,3 +93,4 @@ class Book:
 
 person = Person("John", "Smith", 18)
 # person.last_name = "Jake"
+print(dir(person))
