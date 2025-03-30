@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from collections import UserList
 '''
 Потрібно написати систему, яка буде керувати бібліотекою
 '''
@@ -53,7 +54,15 @@ class Book:
         # self.author = author
         # self.number_of_pages = number_of_pages
         # self.days_to_loan = 
-        
+
+
+class Library(UserList):
+    def append(self, element: Book):
+        # if not isinstance(element, Book):
+        #     raise ValueError
+        self.data.append(element)
+
+
 # my_dict = {'name': 'John', 'surname': 'Smith'}
 # name, surname = **my_dict
 
@@ -91,6 +100,17 @@ class Book:
 
 # print(name, surname)
 
-person = Person("John", "Smith", 18)
+# person = Person("John", "Smith", 18)
 # person.last_name = "Jake"
-print(dir(person))
+# print(dir(person))
+
+lib = Library()
+lib.append(Book("Lord of the Rings", "J.R.R Tolkien", 400))
+lib.append(1)
+lib.append("hello")
+print(lib[1:2])
+
+my_list = [1, 2, 3]
+my_list[1]
+my_list.append(1)
+my_list[1:2]
